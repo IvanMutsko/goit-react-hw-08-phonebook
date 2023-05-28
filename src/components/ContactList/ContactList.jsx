@@ -1,7 +1,7 @@
 import { List, ListItem } from './ContactList.styled';
 import { useSelector } from 'react-redux';
 import { getFilter } from '../../redux/selectors';
-import { useGetContactsQuery } from 'redux/contactsSlice';
+import { useGetContactsQuery } from 'redux/contactsApi';
 import { ContactItem } from './ContactItem';
 import { sortArrOfObj } from 'utils/sortArrOfObj';
 

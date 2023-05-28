@@ -8,8 +8,8 @@ import {
   AddBtn,
 } from './ContactForm.styled';
 import { formatterNumber } from '../../utils/formatterNumber';
-import { useAddContactMutation } from '../../redux/contactsSlice';
-import { useGetContactsQuery } from 'redux/contactsSlice';
+import { useAddContactMutation } from '../../redux/contactsApi';
+import { useGetContactsQuery } from 'redux/contactsApi';
 
 const schema = yup.object().shape({
   name: yup.string().min(2, 'Too Short!').max(70, 'Too Long!').required(),
