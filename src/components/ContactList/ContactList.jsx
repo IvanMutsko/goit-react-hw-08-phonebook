@@ -1,43 +1,43 @@
-import { List, ListItem } from './ContactList.styled';
-import { useSelector } from 'react-redux';
-import { getFilter } from '../../redux/selectors';
-import { useGetContactsQuery } from 'redux/contactsApi';
-import { ContactItem } from './ContactItem';
-import { sortArrOfObj } from 'utils/sortArrOfObj';
+import { List, ListItem, Text, Delete } from './ContactList.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteContact } from '../../redux/contactsSlice';
+import { getFilter, getContacts } from '../../redux/selectors';
 
 const ContactList = () => {
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
   const filter = useSelector(getFilter);
-  const { data: contacts, isLoading } = useGetContactsQuery();
 
-  const filteringContactsList = () => {
-    if (!contacts) return [];
-    const filteredContacts = contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    return filteredContacts;
-  };
-
-  const filteredContactsData = filteringContactsList();
-  const sortedContactsData = sortArrOfObj(filteredContactsData);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
-  if (sortedContactsData.length === 0) {
-    return (
-      <p>Sorry, but you don't have any contacts yet. Add your first contact.</p>
-    );
-  }
+  const filteredContactsList = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
-    <List>
-      {sortedContactsData.map(({ id, name, phone }) => (
-        <ListItem key={id}>
-          <ContactItem name={name} phone={phone} id={id} />
-        </ListItem>
-      ))}
-    </List>
+    <>
+      {contacts.length === 0 ? (
+        <p>
+          Sorry, but you don't have any contacts yet. Add your first contact.
+        </p>
+      ) : (
+        <List>
+          {filteredContactsList.map(({ id, name, number }) => {
+            return (
+              <ListItem key={id}>
+                <Text>
+                  {name}: {number}
+                </Text>
+                <Delete
+                  type="button"
+                  onClick={() => dispatch(deleteContact(id))}
+                >
+                  Delete
+                </Delete>
+              </ListItem>
+            );
+          })}
+        </List>
+      )}
+    </>
   );
 };
 

@@ -1,16 +1,8 @@
 import { Formik, Field, Form } from 'formik';
-import { useRegisterUserMutation } from 'redux/authApi';
-import { store } from 'redux/store';
 
 const RegisterForm = () => {
-  const [registerUser, { isLoading }] = useRegisterUserMutation();
-
   const handleSubmit = async (userData, { resetForm }) => {
     console.log(userData);
-
-    const response = await registerUser(userData);
-    console.log(response);
-
 
     resetForm();
   };

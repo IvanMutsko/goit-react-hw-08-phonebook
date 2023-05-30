@@ -7,7 +7,7 @@ export const FormElement = styled(Form)`
   font-weight: 500;
   align-items: center;
   justify-content: space-between;
-  width: 500px;
+  width: 400px;
   padding: 10px 0;
 
   background-color: #fee5c5;

@@ -7,30 +7,31 @@ import {
   ErrorMessageElement,
   AddBtn,
 } from './ContactForm.styled';
+import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { formatterNumber } from '../../utils/formatterNumber';
-import { useAddContactMutation } from '../../redux/contactsApi';
-import { useGetContactsQuery } from 'redux/contactsApi';
+import { addContact } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 
 const schema = yup.object().shape({
   name: yup.string().min(2, 'Too Short!').max(70, 'Too Long!').required(),
   number: yup
     .string()
-    .matches(/^[0-9]{10}$/, 'Must be exactly 10 digits')
+    .matches(/^[0-9]{7}$/, 'Must be exactly 7 digits')
     .required(),
 });
 
 const initialValues = { name: '', number: '' };
 
 const ContactForm = () => {
-  const { data } = useGetContactsQuery();
+  const contacts = useSelector(getContacts);
 
-  const [addContact, { isLoading }] = useAddContactMutation();
+  const dispatch = useDispatch();
 
   const onSubmitForm = (values, { resetForm }) => {
-    const isContainName = data.some(
+    const isContainName = contacts.some(
       contactName =>
-        contactName.name.toLocaleLowerCase() ===
-        values.name.toLocaleLowerCase().trim()
+        contactName.name.toLocaleLowerCase() === values.name.toLocaleLowerCase()
     );
 
     if (isContainName) {
@@ -38,9 +39,13 @@ const ContactForm = () => {
       return;
     }
 
-    const formatedNumber = formatterNumber(values.number);
+    const newContact = {
+      id: nanoid(),
+      name: values.name,
+      number: formatterNumber(values.number),
+    };
 
-    addContact(values.name, formatedNumber);
+    dispatch(addContact(newContact));
 
     resetForm();
   };
@@ -58,9 +63,7 @@ const ContactForm = () => {
         <FieldTitle htmlFor="number-input">Number</FieldTitle>
         <FieldElement id="number-input" type="tel" name="number" />
         <ErrorMessageElement name="number" component="div" />
-        <AddBtn type="submit" disabled={isLoading}>
-          {isLoading ? `Adding...` : `Add contact`}
-        </AddBtn>
+        <AddBtn type="submit">Add contact</AddBtn>
       </FormElement>
     </Formik>
   );
