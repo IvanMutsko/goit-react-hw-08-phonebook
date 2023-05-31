@@ -1,13 +1,13 @@
-import { List, ListItem } from './ContactList.styled';
 import { useSelector } from 'react-redux';
-import { getFilter } from '../../redux/selectors';
-import { useGetContactsQuery } from 'redux/contactsSlice';
-import { ContactItem } from './ContactItem';
+import { getFilter } from '../../redux/filter/selectors';
 import { sortArrOfObj } from 'utils/sortArrOfObj';
+import { Contact } from '../Contact/Contact';
+import { selectAllContacts } from 'redux/contacts/selectors';
+import css from './ContactList.module.css';
 
 const ContactList = () => {
   const filter = useSelector(getFilter);
-  const { data: contacts, isLoading } = useGetContactsQuery();
+  const contacts = useSelector(selectAllContacts);
 
   const filteringContactsList = () => {
     if (!contacts) return [];
@@ -20,10 +20,6 @@ const ContactList = () => {
   const filteredContactsData = filteringContactsList();
   const sortedContactsData = sortArrOfObj(filteredContactsData);
 
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
-
   if (sortedContactsData.length === 0) {
     return (
       <p>Sorry, but you don't have any contacts yet. Add your first contact.</p>
@@ -31,13 +27,13 @@ const ContactList = () => {
   }
 
   return (
-    <List>
+    <ul className={css.list}>
       {sortedContactsData.map(({ id, name, phone }) => (
-        <ListItem key={id}>
-          <ContactItem name={name} phone={phone} id={id} />
-        </ListItem>
+        <li key={id}>
+          <Contact name={name} phone={phone} id={id} />
+        </li>
       ))}
-    </List>
+    </ul>
   );
 };
 
