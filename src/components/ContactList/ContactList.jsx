@@ -28,9 +28,9 @@ const ContactList = () => {
 
   return (
     <ul className={css.list}>
-      {sortedContactsData.map(({ id, name, phone }) => (
+      {sortedContactsData.map(({ id, name, number }) => (
         <li key={id}>
-          <Contact name={name} phone={phone} id={id} />
+          <Contact name={name} number={number} id={id} />
         </li>
       ))}
     </ul>

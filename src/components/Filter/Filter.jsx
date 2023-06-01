@@ -1,11 +1,8 @@
-import { Formik } from 'formik';
-import { FormElement, FieldElement, FieldTitle } from './Filter.styled';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filter/filterSlice';
-import { getFilter } from '../../redux/filter/selectors';
+import css from './Filter.module.css';
 
 const Filter = () => {
-  const filter = useSelector(getFilter);
   const dispatch = useDispatch();
 
   const onChangeFilterInput = evt => {
@@ -13,16 +10,15 @@ const Filter = () => {
   };
 
   return (
-    <Formik>
-      <FormElement>
-        <FieldTitle>Find contacts by name</FieldTitle>
-        <FieldElement
-          name="filter"
-          value={filter}
-          onChange={onChangeFilterInput}
-        />
-      </FormElement>
-    </Formik>
+    <>
+      <p className={css.text}>Find contacts by name</p>
+      <input
+        onInput={onChangeFilterInput}
+        name="filter"
+        className={css.input}
+        placeholder="Start typing a name..."
+      />
+    </>
   );
 };
 

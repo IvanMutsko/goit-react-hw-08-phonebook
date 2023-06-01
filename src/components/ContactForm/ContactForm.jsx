@@ -12,8 +12,7 @@ const ContactForm = () => {
     const number = form.elements.number.value;
     if (name !== '' || number !== '') {
       const newContact = { name, number };
-      console.log(newContact);
-      dispatch(addContact(name, number));
+      dispatch(addContact(newContact));
       form.reset();
       return;
     }
@@ -21,13 +20,20 @@ const ContactForm = () => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit}>
-      <input name="name" className={css.input} />
-      <input name="number" className={css.input} />
-      <button type="submit" className={css.button}>
-        Add contact
-      </button>
-    </form>
+    <>
+      <p className={css.text}>Add new contact</p>
+      <form className={css.form} onSubmit={handleSubmit}>
+        <input name="name" className={css.input} placeholder="Name" />
+        <input
+          name="number"
+          className={css.input}
+          placeholder="096-11-11-111"
+        />
+        <button type="submit" className={css.button}>
+          Add contact
+        </button>
+      </form>
+    </>
   );
 };
 

@@ -35,3 +35,11 @@
 .button:active {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 }
+
+.text {
+  display: inline-block;
+  text-decoration: none;
+  padding: 12px;
+  font-weight: 700;
+  color: #2a363b;
+}
