@@ -20,7 +20,7 @@ export const register = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
-      alert('Try another mail');
+      alert('Try another email');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -35,6 +35,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      alert('Incorrect email or password');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -66,13 +67,10 @@ export const refreshUser = createAsyncThunk(
     try {
       setAuthHeader(persistedToken);
       const res = await axios.get('/users/current');
-   
-    
+
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
-
-

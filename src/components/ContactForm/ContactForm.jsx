@@ -14,19 +14,6 @@ const ContactForm = () => {
     const name = form.elements.name.value.trim();
     const number = form.elements.number.value;
 
-    const isNameEmpty = name === '';
-    const isNumberValid = /^\d+$/.test(number) && number.length === 10;
-
-    if (isNameEmpty) {
-      alert('You have an empty field for name');
-      return;
-    }
-
-    if (!isNumberValid) {
-      alert('Invalid phone number. Please enter a 10-digit number');
-      return;
-    }
-
     const isNameAlreadyExist = contacts.some(
       contact => contact.name.toLowerCase().trim() === name.toLowerCase()
     );
@@ -49,11 +36,18 @@ const ContactForm = () => {
     <>
       <p className={css.text}>Add new contact</p>
       <form className={css.form} onSubmit={handleSubmit}>
-        <input name="name" className={css.input} placeholder="Name" />
+        <input
+          name="name"
+          className={css.input}
+          placeholder="Name"
+          minLength={3}
+        />
         <input
           name="number"
           className={css.input}
           placeholder="096-11-11-111"
+          minLength={10}
+          maxLength={10}
         />
         <button type="submit" className={css.button}>
           Add contact
