@@ -20,6 +20,7 @@ export const register = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      alert('Try another mail');
       return thunkAPI.rejectWithValue(error.message);
     }
   }
