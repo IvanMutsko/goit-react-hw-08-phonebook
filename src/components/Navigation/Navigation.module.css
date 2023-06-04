@@ -5,3 +5,7 @@
   font-weight: 700;
   color: #2a363b;
 }
+
+:global(.active) {
+  color: rgb(255, 111, 0);
+}
