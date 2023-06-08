@@ -1,4 +1,4 @@
-import { Heading, Text, Flex, Box, Image } from '@chakra-ui/react';
+import { Heading, Text, Flex, Image } from '@chakra-ui/react';
 import phonebook from '../img/phonebook.svg';
 
 export default function Home() {
