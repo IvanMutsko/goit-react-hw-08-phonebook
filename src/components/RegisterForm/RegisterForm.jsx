@@ -1,6 +1,16 @@
 import { useDispatch } from 'react-redux';
 import { register } from 'redux/auth/operations';
-import css from './RegisterForm.module.css';
+import {
+  Container,
+  Input,
+  FormLabel,
+  Button,
+  Stack,
+  Divider,
+  AbsoluteCenter,
+  Box,
+  Heading,
+} from '@chakra-ui/react';
 
 export const RegisterForm = () => {
   const dispatch = useDispatch();
@@ -24,26 +34,63 @@ export const RegisterForm = () => {
   };
 
   return (
-    <form className={css.form} onSubmit={handleSubmit} autoComplete="off">
-      <label className={css.label}>
-        Username
-        <input type="text" name="name" required />
-      </label>
-      <label className={css.label}>
-        Email
-        <input type="email" name="email" required />
-      </label>
-      <label className={css.label}>
-        Password
-        <input
-          type="password"
-          name="password"
-          minLength={7}
-          maxLength={12}
-          required
-        />
-      </label>
-      <button type="submit">Register</button>
-    </form>
+    <Container mt={6}>
+      <Box position="relative" padding="10">
+        <Divider />
+        <AbsoluteCenter bg="white" px="4">
+          <Heading as="h2" fontSize="xl" align="center">
+            Register
+          </Heading>
+        </AbsoluteCenter>
+      </Box>
+
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Stack spacing={2}>
+          <FormLabel for="name" m="0">
+            Name:
+          </FormLabel>
+          <Input
+            type="text"
+            as="input"
+            name="name"
+            placeholder="Name"
+            minLength={3}
+            id="name"
+            isRequired
+          />
+
+          <FormLabel for="email" m="0">
+            Email:
+          </FormLabel>
+          <Input
+            type="email"
+            as="input"
+            name="email"
+            placeholder="Email"
+            minLength={3}
+            id="email"
+            isRequired
+          />
+
+          <FormLabel for="password" m="0">
+            Password:
+          </FormLabel>
+          <Input
+            type="password"
+            as="input"
+            name="password"
+            placeholder="Password"
+            minLength={7}
+            maxLength={12}
+            id="password"
+            isRequired
+          />
+
+          <Button type="submit" variant="brand" mt={2}>
+            Register
+          </Button>
+        </Stack>
+      </form>
+    </Container>
   );
 };

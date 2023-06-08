@@ -3,7 +3,7 @@ import { getFilter } from '../../redux/filter/selectors';
 import { sortArrOfObj } from 'utils/sortArrOfObj';
 import { Contact } from '../Contact/Contact';
 import { selectAllContacts } from 'redux/contacts/selectors';
-import css from './ContactList.module.css';
+import { Container, List, ListItem, Text } from '@chakra-ui/react';
 
 const ContactList = () => {
   const filter = useSelector(getFilter);
@@ -22,18 +22,24 @@ const ContactList = () => {
 
   if (sortedContactsData.length === 0) {
     return (
-      <p>Sorry, but you don't have any contacts yet. Add your first contact.</p>
+      <Container>
+        <Text>
+          Sorry, but you don't have any contacts yet. Add your first contact.
+        </Text>
+      </Container>
     );
   }
 
   return (
-    <ul className={css.list}>
-      {sortedContactsData.map(({ id, name, number }) => (
-        <li key={id}>
-          <Contact name={name} number={number} id={id} />
-        </li>
-      ))}
-    </ul>
+    <Container>
+      <List spacing={4}>
+        {sortedContactsData.map(({ id, name, number }) => (
+          <ListItem key={id}>
+            <Contact name={name} number={number} id={id} />
+          </ListItem>
+        ))}
+      </List>
+    </Container>
   );
 };
 

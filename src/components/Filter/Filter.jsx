@@ -1,6 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filter/filterSlice';
-import css from './Filter.module.css';
+import {
+  Input,
+  Container,
+  Heading,
+  Divider,
+  AbsoluteCenter,
+  Box,
+} from '@chakra-ui/react';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -10,15 +17,25 @@ const Filter = () => {
   };
 
   return (
-    <>
-      <p className={css.text}>Find contacts by name</p>
-      <input
+    <Container py={4} px={4}>
+      <Box position="relative" padding="10">
+        <Divider />
+        <AbsoluteCenter bg="white" px="4">
+          <Heading as="h2" fontSize="l" align="center">
+            Find contacts by name
+          </Heading>
+        </AbsoluteCenter>
+      </Box>
+
+      <Input
+        as="input"
         onInput={onChangeFilterInput}
         name="filter"
-        className={css.input}
         placeholder="Start typing a name..."
+        minLength={3}
+        id="filter"
       />
-    </>
+    </Container>
   );
 };
 

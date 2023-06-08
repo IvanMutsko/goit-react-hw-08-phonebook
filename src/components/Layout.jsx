@@ -1,16 +1,20 @@
 import { Outlet } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AppBar } from './AppBar/AppBar';
+import { Footer } from './Footer/Footer';
 import { Suspense } from 'react';
+import { Box, Container } from '@chakra-ui/react';
 
 export const Layout = () => {
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
+    <Box display="flex" flexDirection="column">
       <AppBar />
-      <Suspense fallback={null}>
+      <Container as={Suspense} fallback={null}>
         <Outlet />
-      </Suspense>
+      </Container>
+
+      <Footer />
       <Toaster position="top-right" reverseOrder={false} />
-    </div>
+    </Box>
   );
 };
