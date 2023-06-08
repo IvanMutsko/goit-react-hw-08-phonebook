@@ -31,7 +31,7 @@ const ContactList = () => {
   }
 
   return (
-    <Container>
+    <Container mb={20}>
       <List spacing={4}>
         {sortedContactsData.map(({ id, name, number }) => (
           <ListItem key={id}>

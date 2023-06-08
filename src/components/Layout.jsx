@@ -9,6 +9,7 @@ export const Layout = () => {
   return (
     <Box display="flex" flexDirection="column">
       <AppBar />
+
       <Container as={Suspense} fallback={null}>
         <Outlet />
       </Container>

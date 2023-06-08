@@ -21,7 +21,7 @@ export const AppBar = () => {
       borderBottom="2px"
       borderColor="brand.900"
       bg={colorMode === 'dark' ? 'brand.100' : 'brand.500'}
-      position="fixed"
+      position="sticky"
       l="0px"
       top="0px"
       w="100%"

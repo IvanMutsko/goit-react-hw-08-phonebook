@@ -16,6 +16,7 @@ export const Footer = () => {
       borderTop="2px"
       borderColor="brand.900"
       bg={colorMode === 'dark' ? 'brand.100' : 'brand.500'}
+      zIndex="1"
     >
       <Text fontSize="xl" mr={2}>
         Created by Ivan Mutsko
