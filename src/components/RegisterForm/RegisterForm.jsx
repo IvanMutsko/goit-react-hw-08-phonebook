@@ -37,7 +37,7 @@ export const RegisterForm = () => {
     <Container mt={6}>
       <Box position="relative" padding="10">
         <Divider />
-        <AbsoluteCenter bg="white" px="4">
+        <AbsoluteCenter px="4">
           <Heading as="h2" fontSize="xl" align="center">
             Register
           </Heading>

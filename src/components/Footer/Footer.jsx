@@ -14,8 +14,8 @@ export const Footer = () => {
       w="100%"
       justify="center"
       borderTop="2px"
-      borderColor="brand.900"
-      bg={colorMode === 'dark' ? 'brand.100' : 'brand.500'}
+      borderColor={colorMode === 'dark' ? 'brand.900' : 'brand.400'}
+      bg={colorMode === 'dark' ? 'brand.500' : 'brand.50'}
       zIndex="1"
     >
       <Text fontSize="xl" mr={2}>
