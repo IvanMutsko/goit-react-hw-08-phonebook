@@ -9,8 +9,8 @@ export const formatPhoneNumber = number => {
   return null;
 };
 
-export function delSeparators(number) {
+export const delSeparators = number => {
   const cleanedNumber = number.replace(/[\(\)-]/g, '');
 
   return cleanedNumber;
-}
+};
