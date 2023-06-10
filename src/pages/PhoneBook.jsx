@@ -6,6 +6,7 @@ import ContactForm from '../components/ContactForm/ContactForm';
 import { fetchContacts } from 'redux/contacts/operations';
 import { selectLoading } from 'redux/contacts/selectors';
 import Filter from 'components/Filter/Filter';
+import { ContactModal } from 'components/ContactModal/ContactModal';
 
 export default function Tasks() {
   const dispatch = useDispatch();
@@ -20,9 +21,14 @@ export default function Tasks() {
       <Helmet>
         <title>Your contacts</title>
       </Helmet>
-      <ContactForm />
+
       <div>{isLoading && 'Request in progress...'}</div>
       <Filter />
+      <ContactModal
+        buttonName={'Add new contact'}
+        modalTitle={'Add new contact'}
+        modalBody={<ContactForm />}
+      />
       <ContactList />
     </>
   );

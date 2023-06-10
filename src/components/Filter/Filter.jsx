@@ -18,11 +18,11 @@ const Filter = () => {
 
   return (
     <Container py={4} px={4}>
-      <Box position="relative" padding="10">
+      <Box position="relative" padding="6">
         <Divider />
         <AbsoluteCenter px="4">
-          <Heading as="h2" fontSize="l" align="center">
-            Find contacts by name
+          <Heading as="h2" fontSize="xl" align="center">
+            Find contact by name
           </Heading>
         </AbsoluteCenter>
       </Box>

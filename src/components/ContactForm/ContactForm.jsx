@@ -8,15 +8,10 @@ import {
   Stack,
   InputGroup,
   InputLeftElement,
-  Container,
-  Heading,
   Icon,
   Button,
   FormLabel,
   InputLeftAddon,
-  Divider,
-  AbsoluteCenter,
-  Box,
 } from '@chakra-ui/react';
 import { BsFillPersonFill } from 'react-icons/bs';
 
@@ -52,16 +47,7 @@ const ContactForm = () => {
   };
 
   return (
-    <Container py={4} px={4}>
-      <Box position="relative" padding="10">
-        <Divider />
-        <AbsoluteCenter px="4">
-          <Heading as="h2" fontSize="xl" align="center">
-            Add new contact
-          </Heading>
-        </AbsoluteCenter>
-      </Box>
-
+    <>
       <form onSubmit={handleSubmit}>
         <Stack spacing={2}>
           <FormLabel for="name" m="0">
@@ -94,12 +80,12 @@ const ContactForm = () => {
               id="number"
             />
           </InputGroup>
-          <Button type="submit" variant="brand" mt={2}>
+          <Button type="submit" variant="brand" mt={4}>
             Add contact
           </Button>
         </Stack>
       </form>
-    </Container>
+    </>
   );
 };
 
