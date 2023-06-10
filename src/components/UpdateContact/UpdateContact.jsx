@@ -1,8 +1,6 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
-import { selectAllContacts } from 'redux/contacts/selectors';
-import { formatPhoneNumber } from 'utils/formatPhoneNumber';
-import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { updateContact } from 'redux/contacts/operations';
+import { delSeparators, formatPhoneNumber } from 'utils/formatPhoneNumber';
 import {
   Input,
   Stack,
@@ -15,9 +13,9 @@ import {
 } from '@chakra-ui/react';
 import { BsFillPersonFill } from 'react-icons/bs';
 
-const ContactForm = () => {
-  const contacts = useSelector(selectAllContacts);
+export const UpdateContact = ({ id, name, number }) => {
   const dispatch = useDispatch();
+
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -26,23 +24,13 @@ const ContactForm = () => {
     const name = form.elements.name.value.trim();
     const number = form.elements.number.value;
 
-    const isNameAlreadyExist = contacts.some(
-      contact => contact.name.toLowerCase().trim() === name.toLowerCase()
-    );
-
-    if (isNameAlreadyExist) {
-      toast.error(`${name} is already in contacts.`, {
-        position: 'top-center',
-      });
-      return;
-    }
-
-    const newContact = {
+    const updatedContact = {
+      id,
       name,
       number: formatPhoneNumber(number),
     };
 
-    dispatch(addContact(newContact));
+    dispatch(updateContact(updatedContact));
     form.reset();
   };
 
@@ -61,7 +49,7 @@ const ContactForm = () => {
             <Input
               as="input"
               name="name"
-              placeholder="Name"
+              defaultValue={name}
               minLength={3}
               id="name"
             />
@@ -74,19 +62,17 @@ const ContactForm = () => {
             <Input
               as="input"
               name="number"
-              placeholder="(096)-11-11-111"
               minLength={10}
               maxLength={10}
               id="number"
+              defaultValue={delSeparators(number)}
             />
           </InputGroup>
           <Button type="submit" variant="brand" mt={4}>
-            Add contact
+            Update contact
           </Button>
         </Stack>
       </form>
     </>
   );
 };
-
-export default ContactForm;

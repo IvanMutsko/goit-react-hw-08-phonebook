@@ -2,6 +2,8 @@ import { useDispatch } from 'react-redux';
 import { deleteContact } from 'redux/contacts/operations';
 import { Flex, Avatar, Box, Text, Button, Divider } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { ContactModal } from 'components/ContactModal/ContactModal';
+import { UpdateContact } from 'components/UpdateContact/UpdateContact';
 
 export const Contact = ({ id, name, number }) => {
   const dispatch = useDispatch();
@@ -15,9 +17,16 @@ export const Contact = ({ id, name, number }) => {
           <Text fontWeight="bold">{name}</Text>
           <Text fontSize="sm">{number}</Text>
         </Box>
-        <Button type="button" onClick={handleDelete} variant="brand" ml="auto">
-          <DeleteIcon />
-        </Button>
+        <Box ml="auto" display="flex" alignItems="center">
+          <ContactModal
+            buttonName={'Update'}
+            modalTitle={'Update you contact'}
+            modalBody={<UpdateContact id={id} name={name} number={number} />}
+          />
+          <Button type="button" onClick={handleDelete} variant="brand">
+            <DeleteIcon />
+          </Button>
+        </Box>
       </Flex>
       <Divider />
     </>

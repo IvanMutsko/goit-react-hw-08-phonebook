@@ -46,7 +46,7 @@ export const RegisterForm = () => {
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <Stack spacing={2}>
-          <FormLabel for="name" m="0">
+          <FormLabel htmlFor="name" m="0">
             Name:
           </FormLabel>
           <Input
@@ -59,7 +59,7 @@ export const RegisterForm = () => {
             isRequired
           />
 
-          <FormLabel for="email" m="0">
+          <FormLabel htmlFor="email" m="0">
             Email:
           </FormLabel>
           <Input
@@ -72,7 +72,7 @@ export const RegisterForm = () => {
             isRequired
           />
 
-          <FormLabel for="password" m="0">
+          <FormLabel htmlFor="password" m="0">
             Password:
           </FormLabel>
           <Input

@@ -40,7 +40,7 @@ export const LoginForm = () => {
 
       <form onSubmit={handleSubmit} autoComplete="off">
         <Stack spacing={2}>
-          <FormLabel for="email" m="0">
+          <FormLabel htmlFor="email" m="0">
             Email:
           </FormLabel>
           <Input
@@ -51,7 +51,7 @@ export const LoginForm = () => {
             minLength={3}
             id="email"
           />
-          <FormLabel for="password" m="0">
+          <FormLabel htmlFor="password" m="0">
             Password:
           </FormLabel>
           <Input

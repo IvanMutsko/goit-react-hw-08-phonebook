@@ -25,9 +25,9 @@ export const addContact = createAsyncThunk(
       const response = await axios.post('/contacts', newContact);
       toast.success('Contact added!', { position: 'top-center' });
       return response.data;
-    } catch (e) {
+    } catch (error) {
       toast.error('An error occurred!', { position: 'top-center' });
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -39,9 +39,26 @@ export const deleteContact = createAsyncThunk(
       const response = await axios.delete(`/contacts/${id}`);
       toast.success('Contact deleted!', { position: 'top-center' });
       return response.data;
-    } catch (e) {
+    } catch (error) {
       toast.error('An error occurred!', { position: 'top-center' });
-      return thunkAPI.rejectWithValue(e.message);
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateContact = createAsyncThunk(
+  'contacts/redactContact',
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(`/contacts/${data.id}`, {
+        name: data.name,
+        number: data.number,
+      });
+      toast.success('Contact updated!', { position: 'top-center' });
+      return response.data;
+    } catch (error) {
+      toast.error('An error occurred!', { position: 'top-center' });
+      return rejectWithValue(error.message);
     }
   }
 );
