@@ -5,6 +5,7 @@ import {
   selectAllContacts,
 } from '../redux/contacts/selectors';
 import * as operations from '../redux/contacts/operations';
+import { useCallback } from 'react';
 
 export const useContacts = () => {
   const dispatch = useDispatch();
@@ -13,9 +14,9 @@ export const useContacts = () => {
   const isContactsFiltered = useSelector(selectFilter);
   const isAllContacts = useSelector(selectAllContacts);
 
-  const fetchContacts = async () => {
+  const fetchContacts = useCallback(async () => {
     await dispatch(operations.fetchContacts()).unwrap();
-  };
+  }, [dispatch]);
 
   const addContact = async newContact => {
     await dispatch(operations.addContact(newContact)).unwrap();

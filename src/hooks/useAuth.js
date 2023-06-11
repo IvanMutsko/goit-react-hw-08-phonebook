@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectUser,
@@ -25,9 +26,9 @@ export const useAuth = () => {
     await dispatch(operations.logOut(user)).unwrap();
   };
 
-  const refreshUser = async () => {
+  const refreshUser = useCallback(async () => {
     await dispatch(operations.refreshUser()).unwrap();
-  };
+  }, [dispatch]);
 
   return {
     isLoggedIn,

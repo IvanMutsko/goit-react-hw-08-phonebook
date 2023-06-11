@@ -15,7 +15,7 @@ export const App = () => {
 
   useEffect(() => {
     refreshUser();
-  });
+  }, [refreshUser]);
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
