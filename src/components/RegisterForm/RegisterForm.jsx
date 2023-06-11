@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { useAuth } from 'hooks';
 import {
   Container,
   Input,
@@ -13,24 +12,26 @@ import {
 } from '@chakra-ui/react';
 
 export const RegisterForm = () => {
-  const dispatch = useDispatch();
+  const { register } = useAuth();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.name.value;
     const email = form.elements.email.value;
     const password = form.elements.password.value;
 
-    dispatch(
-      register({
+    try {
+      await register({
         name,
         email,
         password,
-      })
-    );
+      });
 
-    form.reset();
+      form.reset();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

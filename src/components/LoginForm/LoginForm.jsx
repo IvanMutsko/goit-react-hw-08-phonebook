@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { logIn } from 'redux/auth/operations';
+import { useAuth } from 'hooks';
 import {
   Container,
   Input,
@@ -13,18 +12,21 @@ import {
 } from '@chakra-ui/react';
 
 export const LoginForm = () => {
-  const dispatch = useDispatch();
+  const { logIn } = useAuth();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
-      logIn({
+
+    try {
+      await logIn({
         email: form.elements.email.value,
         password: form.elements.password.value,
-      })
-    );
-    form.reset();
+      });
+      form.reset();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

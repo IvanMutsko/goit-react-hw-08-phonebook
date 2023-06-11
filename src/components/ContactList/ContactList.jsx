@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
 import { getFilter } from '../../redux/filter/selectors';
+import { useContacts } from 'hooks/useContacts';
 import { sortArrOfObj } from 'utils/sortArrOfObj';
 import { Contact } from '../Contact/Contact';
-import { selectAllContacts } from 'redux/contacts/selectors';
 import { Container, List, ListItem, Text } from '@chakra-ui/react';
 
 const ContactList = () => {
   const filter = useSelector(getFilter);
-  const contacts = useSelector(selectAllContacts);
+  const { isAllContacts } = useContacts();
 
   const filteringContactsList = () => {
-    if (!contacts) return [];
-    const filteredContacts = contacts.filter(contact =>
+    if (!isAllContacts) return [];
+    const filteredContacts = isAllContacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
     return filteredContacts;

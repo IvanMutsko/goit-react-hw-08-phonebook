@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/contacts/operations';
+import { useContacts } from 'hooks/useContacts';
 import {
   Flex,
   Avatar,
@@ -14,11 +13,8 @@ import { ContactModal } from 'components/ContactModal/ContactModal';
 import { UpdateContact } from 'components/UpdateContact/UpdateContact';
 
 export const Contact = ({ id, name, number }) => {
-  const dispatch = useDispatch();
+  const { deleteContact } = useContacts();
   const update = useDisclosure();
-
-
-  const handleDelete = () => dispatch(deleteContact(id));
 
   return (
     <>
@@ -42,7 +38,11 @@ export const Contact = ({ id, name, number }) => {
               />
             }
           />
-          <Button type="button" onClick={handleDelete} variant="brand">
+          <Button
+            type="button"
+            onClick={() => deleteContact(id)}
+            variant="brand"
+          >
             <DeleteIcon />
           </Button>
         </Box>

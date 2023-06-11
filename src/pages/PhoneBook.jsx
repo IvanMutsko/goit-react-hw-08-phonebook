@@ -1,23 +1,19 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import ContactList from 'components/ContactList/ContactList';
 import ContactForm from '../components/ContactForm/ContactForm';
-import { fetchContacts } from 'redux/contacts/operations';
-import { selectLoading } from 'redux/contacts/selectors';
+import { useContacts } from 'hooks/useContacts';
 import Filter from 'components/Filter/Filter';
 import { ContactModal } from 'components/ContactModal/ContactModal';
 import { useDisclosure } from '@chakra-ui/react';
 
 export default function Tasks() {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectLoading);
-
+  const { isContactsLoading, fetchContacts } = useContacts();
   const register = useDisclosure();
 
   useEffect(() => {
-    dispatch(fetchContacts());
-  }, [dispatch]);
+    fetchContacts();
+  }, [fetchContacts]);
 
   return (
     <>
@@ -25,7 +21,7 @@ export default function Tasks() {
         <title>Your contacts</title>
       </Helmet>
 
-      <div>{isLoading && 'Request in progress...'}</div>
+      <div>{isContactsLoading && 'Request in progress...'}</div>
       <Filter />
       <ContactModal
         {...register}

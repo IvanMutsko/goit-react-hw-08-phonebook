@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contacts/operations';
-import { selectAllContacts } from 'redux/contacts/selectors';
+import { useContacts } from 'hooks/useContacts';
 import { formatPhoneNumber } from 'utils/formatPhoneNumber';
 import toast from 'react-hot-toast';
 import {
@@ -16,8 +14,7 @@ import {
 import { BsFillPersonFill } from 'react-icons/bs';
 
 const ContactForm = ({ onSubmit }) => {
-  const contacts = useSelector(selectAllContacts);
-  const dispatch = useDispatch();
+  const { isAllContacts, addContact } = useContacts();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -26,7 +23,7 @@ const ContactForm = ({ onSubmit }) => {
     const name = form.elements.name.value.trim();
     const number = form.elements.number.value;
 
-    const isNameAlreadyExist = contacts.some(
+    const isNameAlreadyExist = isAllContacts.some(
       contact => contact.name.toLowerCase().trim() === name.toLowerCase()
     );
 
@@ -43,7 +40,7 @@ const ContactForm = ({ onSubmit }) => {
     };
 
     try {
-      await dispatch(addContact(newContact)).unwrap();
+      await addContact(newContact);
       form.reset();
       onSubmit();
     } catch (e) {

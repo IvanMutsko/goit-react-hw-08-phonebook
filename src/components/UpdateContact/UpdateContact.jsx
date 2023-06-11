@@ -1,5 +1,4 @@
-import { useDispatch } from 'react-redux';
-import { updateContact } from 'redux/contacts/operations';
+import { useContacts } from 'hooks/useContacts';
 import { delSeparators, formatPhoneNumber } from 'utils/formatPhoneNumber';
 import {
   Input,
@@ -14,7 +13,7 @@ import {
 import { BsFillPersonFill } from 'react-icons/bs';
 
 export const UpdateContact = ({ id, name, number, onSubmit }) => {
-  const dispatch = useDispatch();
+  const { updateContact } = useContacts();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -29,15 +28,13 @@ export const UpdateContact = ({ id, name, number, onSubmit }) => {
       number: formatPhoneNumber(number),
     };
 
-
     try {
-      await dispatch(updateContact(updatedContact)).unwrap();
+      await updateContact(updatedContact);
       form.reset();
       onSubmit();
     } catch (e) {
       console.log(e);
     }
-    
   };
 
   return (
