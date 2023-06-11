@@ -13,11 +13,10 @@ import {
 } from '@chakra-ui/react';
 import { BsFillPersonFill } from 'react-icons/bs';
 
-export const UpdateContact = ({ id, name, number }) => {
+export const UpdateContact = ({ id, name, number, onSubmit }) => {
   const dispatch = useDispatch();
 
-
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -30,8 +29,15 @@ export const UpdateContact = ({ id, name, number }) => {
       number: formatPhoneNumber(number),
     };
 
-    dispatch(updateContact(updatedContact));
-    form.reset();
+
+    try {
+      await dispatch(updateContact(updatedContact)).unwrap();
+      form.reset();
+      onSubmit();
+    } catch (e) {
+      console.log(e);
+    }
+    
   };
 
   return (

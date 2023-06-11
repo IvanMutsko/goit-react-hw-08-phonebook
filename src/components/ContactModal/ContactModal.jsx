@@ -8,11 +8,17 @@ import {
   ModalCloseButton,
   Button,
   Container,
-  useDisclosure,
   Box,
 } from '@chakra-ui/react';
 
-export const ContactModal = ({ buttonName, modalTitle, modalBody }) => {
+export const ContactModal = ({
+  buttonName,
+  modalTitle,
+  modalBody,
+  isOpen,
+  onOpen,
+  onClose,
+}) => {
   const Overlay = () => (
     <ModalOverlay
       bg="blackAlpha.300"
@@ -20,7 +26,6 @@ export const ContactModal = ({ buttonName, modalTitle, modalBody }) => {
     />
   );
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [overlay, setOverlay] = React.useState(<Overlay />);
 
   return (

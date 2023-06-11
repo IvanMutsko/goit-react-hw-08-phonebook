@@ -7,10 +7,13 @@ import { fetchContacts } from 'redux/contacts/operations';
 import { selectLoading } from 'redux/contacts/selectors';
 import Filter from 'components/Filter/Filter';
 import { ContactModal } from 'components/ContactModal/ContactModal';
+import { useDisclosure } from '@chakra-ui/react';
 
 export default function Tasks() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
+
+  const register = useDisclosure();
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -25,9 +28,10 @@ export default function Tasks() {
       <div>{isLoading && 'Request in progress...'}</div>
       <Filter />
       <ContactModal
+        {...register}
         buttonName={'Add new contact'}
         modalTitle={'Add new contact'}
-        modalBody={<ContactForm />}
+        modalBody={<ContactForm onSubmit={register.onClose} />}
       />
       <ContactList />
     </>

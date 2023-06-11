@@ -9,7 +9,6 @@ export const fetchContacts = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get('/contacts');
-      toast.success('Contact loaded!', { position: 'top-center' });
       return res.data;
     } catch (error) {
       toast.error('An error occurred!', { position: 'top-center' });
